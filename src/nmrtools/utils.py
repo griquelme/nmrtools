@@ -2,17 +2,20 @@ import numpy as np
 from typing import Union
 
 
-def fid(grid: np.ndarray, t2: float, omega: float, phase: float) -> np.ndarray:
+def fid(
+    t: np.ndarray, t2: float, f0: float, phase: float = 0.0
+) -> np.ndarray:
     """
     Computes a free induction decay signal.
 
     Parameters
     ----------
-    grid : array
+    t : array
+        Time samples to create the fid
     t2 : float
-        Transverse relaxation
-    omega : float
-        Larmor frequency
+        Transverse relaxation, in `t` units.
+    f0 : float
+        Larmor frequency, in `1/t` units.
     phase : float
         Phase of the signal, in radians
 
@@ -21,20 +24,21 @@ def fid(grid: np.ndarray, t2: float, omega: float, phase: float) -> np.ndarray:
     np.ndarray
 
     """
-    return np.exp(- grid / t2 + omega * grid * 1j + phase)
+    return np.exp(- t / t2 + 2 * np.pi * f0 * t * 1j + phase)
 
 
-def lorentz(grid, omega, t2):
+def lorentz(f, omega, t2):
     """
     Computes an absorptive lorentzian
 
     Parameters
     ----------
-    grid : array
+    f : array
+        frequency samples
     t2 : float
-        Transverse relaxation
+        Transverse relaxation, in `1/f` units.
     omega : float
-        Larmor frequency
+        Larmor frequency, in `f` units.
 
     Returns
     -------
@@ -42,7 +46,7 @@ def lorentz(grid, omega, t2):
 
     """
     lam = 1 / t2
-    res = lam ** 2 / (lam ** 2 + (grid - omega) ** 2)
+    res = lam ** 2 / (lam ** 2 + (f - omega) ** 2)
     return res
 
 
