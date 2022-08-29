@@ -1,7 +1,8 @@
 NMR tools
 =========
 
-A small set of tools to work with NMR data in untargeted metabolomics.
+A small set of tools to work with NMR data in untargeted metabolomics, built on
+top of nmrglue and Numpy.
 
 
 Installation
