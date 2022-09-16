@@ -8,7 +8,7 @@ Features
 --------
 * Simulation of 1D spectra of mixtures.
 * Multiplet annotation algorithm.
-* STOCSY utilites (computation and plotting)
+* STOCSY utilities (computation and plotting)
 
 
 Installation
