@@ -96,7 +96,7 @@ def covmatk(X: np.ndarray, k: int) -> np.ndarray:
     """
     n = X.shape[0]
     Xc = X - X.mean(axis=0)
-    return np.dot(Xc[:, k].reshape((1, n)),  Xc) / (n - 1)
+    return np.dot(Xc[:, k],  Xc) / (n - 1)
 
 
 def corrmat(X):
@@ -139,7 +139,7 @@ def corrmatk(X: np.ndarray, k: int) -> np.ndarray:
     """
     n = X.shape[0]
     Z = (X - X.mean(axis=0)) / X.std(axis=0, ddof=1)
-    return np.dot(Z[:, k].reshape((1, n)), Z) / (n - 1)
+    return np.dot(Z[:, k], Z) / (n - 1)
 
 
 def find_closest(x: np.ndarray, xq: Union[np.ndarray, float, int],
