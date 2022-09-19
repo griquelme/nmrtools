@@ -27,7 +27,7 @@ def fid(
     return np.exp(- t / t2 + 2 * np.pi * f0 * t * 1j + phase)
 
 
-def lorentz(f, omega, t2):
+def lorentz(f: np.ndarray, omega: float, t2: float, normalize: bool = True) -> np.ndarray:
     """
     Computes an absorptive lorentzian
 
@@ -39,6 +39,9 @@ def lorentz(f, omega, t2):
         Transverse relaxation, in `1/f` units.
     omega : float
         Larmor frequency, in `f` units.
+    normalize : bool, default=True
+        If ``True``, normalizes the curve to have a maximum at 1. Otherwise,
+        the real absorptive part of the FID is computed.
 
     Returns
     -------
@@ -47,6 +50,8 @@ def lorentz(f, omega, t2):
     """
     lam = 1 / t2
     res = lam ** 2 / (lam ** 2 + (f - omega) ** 2)
+    if normalize:
+        res *= lam
     return res
 
 
